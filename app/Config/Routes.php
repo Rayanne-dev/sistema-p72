@@ -3,6 +3,8 @@
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
+service('auth')->routes($routes);
+
 $routes->get('/', 'Home::index');
 $routes->get('/home', 'ConteudoController::index');
 $routes->get('/Contato', 'ConteudoController::Contato');
@@ -12,7 +14,19 @@ $routes->get('/Habilidades', 'ConteudoController::Habilidades');
 $routes->get('/FaleComigo', 'ConteudoController::FaleComigo');
 
 
-//Listagem, formulário de edição e atualização
-$routes->get('conteudos', 'ConteudoController::listar');
-$routes->get('conteudos/editar/(:num)', 'ConteudoController::editar/$1');
-$routes->post('conteudos/atualizar/(:num)', 'ConteudoController::atualizar/$1');
+// Rotas que exigem autenticação por sessão
+$routes->group('', ['filter' => 'session'], static function ($routes) {
+    $routes->get('conteudos', 'ConteudoController::listar');
+    $routes->get('conteudos/editar/(:num)', 'ConteudoController::editar/$1');
+    $routes->post('conteudos/atualizar/(:num)', 'ConteudoController::atualizar/$1');
+    });
+
+// Exemplo de rota exclusiva para administradores
+$routes->get('admin', 'Admin\Painel::index', [
+    'filter' => ['session', 'group:admin'],
+    ]);
+
+    // Logout: aceita apenas usuários autenticados
+$routes->post('admin/sair', 'Admin\Painel::logout', [
+ 'filter' => 'session',
+]);

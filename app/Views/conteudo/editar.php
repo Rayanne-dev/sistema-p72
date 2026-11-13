@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Conteudo</title>
+    <link rel="stylesheet" href="<?= base_url('assets/css/estilo.css') ?>?>=2">
 </head>
 <body>
     <h1>Editar conteúdo #<?= esc($conteudo['Id']) ?></h1>

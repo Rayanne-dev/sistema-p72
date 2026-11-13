@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $conteudo['Titulo'] ?? 'Meu Site'; ?></title>
         <!-- O base_url() aponta diretamente para a pasta /public/ -->
-        <link rel="stylesheet" href="<?= base_url('assets/css/estilo.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/estilo.css') ?>?v=2">
     </head>
     <body>
         <header>
